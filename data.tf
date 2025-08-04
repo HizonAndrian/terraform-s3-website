@@ -4,5 +4,5 @@ data "aws_acm_certificate" "acm_domain" {
 }
 
 output "acm_output" {
-  value = data.aws_acm_certificate.acm_domain.id
+  value = "cloudriann.com"
 }
