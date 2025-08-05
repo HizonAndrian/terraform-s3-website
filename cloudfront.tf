@@ -9,11 +9,6 @@ resource "aws_cloudfront_origin_access_control" "cloudfront_OAC" {
   signing_protocol                  = "sigv4"
 }
 
-moved {
-  to = aws_cloudfront_distribution.cloudfront_config
-  from = aws_cloudfront_distribution.name
-}
-
 resource "aws_cloudfront_distribution" "cloudfront_config" {
   origin {
     domain_name              = aws_s3_bucket.s3_bucket.bucket_regional_domain_name
@@ -23,6 +18,12 @@ resource "aws_cloudfront_distribution" "cloudfront_config" {
 
   enabled             = true
   default_root_object = "index.html"
+
+  custom_error_response {
+    error_code         = 404
+    response_code      = 404
+    response_page_path = "/error.html"
+  }
 
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD"]
