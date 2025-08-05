@@ -25,6 +25,12 @@ resource "aws_cloudfront_distribution" "cloudfront_config" {
     response_page_path = "/error.html"
   }
 
+  custom_error_response {
+    error_code         = 403
+    response_code      = 403
+    response_page_path = "/error.html"
+  }
+
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD"]
     cached_methods         = ["GET", "HEAD"]
